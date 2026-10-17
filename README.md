@@ -16,7 +16,11 @@ WebGL Forward+ and Clustered Deferred Shading
 #### Native 
 ![Native](media/Proj4-native.gif)
 
-[![](img/video.mp4)](TODO)
+#### Forward Plus 
+![Native](media/Proj4-Forward-Plus.gif)
+
+#### Cluster Deferred
+![Native](media/Proj4-Clustered-Deferred.gif)
 
 ### (TODO: Your README)
 
