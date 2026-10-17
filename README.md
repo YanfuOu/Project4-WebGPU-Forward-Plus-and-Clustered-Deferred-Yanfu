@@ -24,13 +24,9 @@ See the renderings live by clicking on the image above or [here](https://www.yan
 ![Cluster Deferred](media/Proj4-Clustered-Deferred.gif)
 
 
-### (TODO: Your README)
+## Performance Analysis
 
-*DO NOT* leave the README to the last minute! It is a crucial part of the
-project, and we will not be able to grade you without a good README.
 
-This assignment has a considerable amount of performance analysis compared
-to implementation work. Complete the implementation early to leave time!
 
 ### Credits
 
