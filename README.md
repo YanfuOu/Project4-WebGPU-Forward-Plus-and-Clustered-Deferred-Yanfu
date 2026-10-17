@@ -22,8 +22,7 @@ See the renderings live by clicking on the image above or [here](https://www.yan
 
 #### Cluster Deferred
 <video src="https://raw.githubusercontent.com/YanfuOu/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred-Yanfu/main/media/Proj4-Clustered-Deferred.mp4" controls width="100%"></video>
-#### Cluster Deferred
-![Cluster Deferred](media/Proj4-Clustered-Deferred.mp4)
+
 
 ### (TODO: Your README)
 
