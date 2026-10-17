@@ -15,13 +15,13 @@ See the renderings live by clicking on the image above or [here](https://www.yan
 ## Demo GIF
 
 #### Native
-<video src="https://raw.githubusercontent.com/YanfuOu/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred-Yanfu/main/media/Proj4-native.mp4" controls width="100%"></video>
+![Native](media/Proj4-native.gif)
 
 #### Forward Plus
-<video src="https://raw.githubusercontent.com/YanfuOu/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred-Yanfu/main/media/Proj4-Forward-Plus.mp4" controls width="100%"></video>
+![Forward Plus](media/Proj4-Forward-Plus.gif)
 
 #### Cluster Deferred
-<video src="https://raw.githubusercontent.com/YanfuOu/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred-Yanfu/main/media/Proj4-Clustered-Deferred.mp4" controls width="100%"></video>
+![Cluster Deferred](media/Proj4-Clustered-Deferred.gif)
 
 
 ### (TODO: Your README)
