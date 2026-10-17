@@ -3,9 +3,9 @@ WebGL Forward+ and Clustered Deferred Shading
 
 **University of Pennsylvania, CIS 565: GPU Programming and Architecture, Project 4**
 
-* (TODO) YOUR NAME HERE
-* Tested on: (TODO) **Google Chrome 222.2** on
-  Windows 22, i7-2222 @ 2.22GHz 22GB, GTX 222 222MB (Moore 2222 Lab)
+* Yanfu Ou
+* Tested on: **Google Chrome Version 155.0.8059.39 ** on
+  Ubuntu 24.04LTS, Ryzen 7 7840 @ 2.5GHz 64GB DDR4, RTX 5070 8GB
 
 ### Live Demo
 
