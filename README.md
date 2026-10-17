@@ -9,7 +9,7 @@ WebGL Forward+ and Clustered Deferred Shading
 
 ### Live Demo
 
-[![](img/thumb.png)](http://TODO.github.io/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred)
+[![media/live-web-demo.png](media/live-web-demo.png)](https://www.yanfuou.com/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred-Yanfu/)
 
 ### Demo GIF
 

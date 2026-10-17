@@ -49,8 +49,14 @@ function setRenderer(mode: string) {
     }
 }
 
-const renderModes = { naive: 'naive', forwardPlus: 'forward+', clusteredDeferred: 'clustered deferred' };
-let renderModeController = gui.add({ mode: renderModes.naive }, 'mode', renderModes);
+const renderModes = { clusteredDeferred: 'clustered deferred', forwardPlus: 'forward+', naive: 'naive'};
+// Keys are the dropdown labels. dat.GUI lists them in insertion order.
+const renderModeOptions = {
+    'clustered deferred': renderModes.clusteredDeferred,
+    'forward+': renderModes.forwardPlus,
+    native: renderModes.naive,
+};
+let renderModeController = gui.add({ mode: renderModes.clusteredDeferred }, 'mode', renderModeOptions);
 renderModeController.onChange(setRenderer);
 
 setRenderer(renderModeController.getValue());
