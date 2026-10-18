@@ -102,6 +102,16 @@ Smaller clusters hold fewer lights, so each fragment (Forward+) or pixel (deferr
 
 The cost is memory. Each cluster stores up to 511 light indices (2080 bytes with padding), so the cluster buffer grows from about 6.9 MiB (3456 clusters) to about 55 MiB (27648 clusters). `16 × 9 × 48` reached the same 15 ms for Forward+ with a quarter of the clusters (about 13.7 MiB), so it would be the better choice if memory is tight.
 
+#### Cluster light-count debug view
+
+The "Cluster Light Count" checkbox replaces shading with the light list of the cluster under each visible surface. Blue is an empty cluster. The ramp passes through yellow and saturates at red once a cluster holds 64 lights. Both shots below are 500 lights. Since the lights keep moving, the two frames are not an exact pair but the general pattern is the same.
+
+| Clustered Deferred | Forward + | 
+| :------------------ | :---------- | 
+| ![Clustered deferred light-count view](media/debug-pic-clustered.png) | ![Forward+ light-count view](media/debug-pic-forward.png) |
+
+The block edges are the screen tiles. Color also changes with distance: the near walls and the foreground are redder, and the far arch and upper windows are more yellow or more blue. Those pixels sit in farther depth slices, which contain fewer of the lights. That is why adding depth slices in the grid sweep cut frame time more than only splitting the screen. The red tiles are the long light lists. Forward+ walks each of those lists once per overlapping fragment, and clustered deferred walks each one once per pixel, which is why Forward+ slows down faster as the light count grows.
+
 ### Forward+
 
 For each frame, a compute shader builds an axis-aligned box for every screen tile and exponential depth slice. Afterwards, it then tests every light against that box. A fragment looks up its cluster from its screen position and view-space depth and shades only the lights stored there. The naive renderer does the same shading, but the loop bound is `lightSet.numLights`, so every fragment evaluates every light.
