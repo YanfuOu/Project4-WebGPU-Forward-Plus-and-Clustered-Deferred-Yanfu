@@ -112,7 +112,7 @@ Forward+ still grows with the light count because each overlapping fragment repe
 
 The grid sweep at 2000 lights separates those two costs. Splitting depth helps more than splitting the screen: `16×9×12` (1728 clusters) takes 30 ms, while `8×5×24` (960 clusters) takes 24 ms. The worst grid is the coarsest, `8×5×12` at 40 ms, where each cluster holds many lights. The best measured grids are `16×9×48` and `32×18×48`, both 15 ms. Going from 6912 to 27648 clusters did not get slower, so on this GPU the clustering pass is still cheaper than the extra shading it removes. The original setting, `16×9×24`, was 21 ms at 2000 lights, which is why the shipped grid is now `32×18×48`. A 1 ms reversal, such as 25 ms at 2100 lights and 24 ms at 2500, is the one-second average moving, not a real speedup.
 
-Further gains would come from a depth prepass so only the visible fragment is shaded, and from tightening the cluster test so large overlaps do not fill the 511-light cap.
+Forward+ is at its best with few overlapping lights and little overdraw, and at its worst with many lights and heavy overdraw. Further gains would come from a depth prepass so only the visible fragment is shaded, and from tightening the cluster test so large overlaps do not fill the 511-light cap.
 
 ### Cluster Deferred
 
@@ -120,7 +120,7 @@ This reuses the same cluster buffer. The geometry pass writes albedo, normal, an
 
 The G-buffer is the tradeoff. Albedo is `rgba8unorm`. Normal and position are `rgba16float`. That is extra bandwidth on every pixel, which Forward+ does not pay. In return, lighting no longer scales with overdraw. Deferred stays on the 6 ms floor until 1600 lights, then rises slowly to 14 ms at 5000 lights. At 5000 lights it is about 3× faster than Forward+ (47 ms) and about 40× faster than naive (560 ms).
 
-The same grid sweep shows the same shape, compressed into a smaller range of 12 ms on `8×5×12`, and 8 ms on the three finest grids. Deferred is less sensitive to cluster size because the light loop runs once per pixel instead of once per shaded fragment. Below about 1600 lights, the 6 ms floor hides its advantage over Forward+.
+The same grid sweep shows the same shape, compressed into a smaller range of 12 ms on `8×5×12`, and 8 ms on the three finest grids. Deferred is less sensitive to cluster size because the light loop runs once per pixel instead of once per shaded fragment. Below about 1600 lights, the 6 ms floor hides its advantage over Forward+. Deferred is at its best with many small lights in an overlapping scene, and at its worst at low light counts, where it still pays for the G-buffer.
 
 However, storing a full world position and a `vec4` normal is more G-buffer data than the lighting pass needs. Reconstructing position from depth, and packing the normal into fewer bits would cut that bandwidth. The geometry pass would still be the cost that remains when the light count is low.
 
