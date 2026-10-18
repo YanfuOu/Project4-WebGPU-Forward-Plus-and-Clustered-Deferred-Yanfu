@@ -40,6 +40,7 @@ For 30+ second video demos, please visit this Google Drive folder <em>[link](htt
 #### Number of Lights vs Render Time of Different Methods
 
 ![chart](media/Number%20of%20Lights%20vs%20Render%20Times.png)
+
 Times are the one-second MS average. This sweep was measured with the original 16 × 9 × 24 cluster grid, before the grid optimization described below.
 
 
@@ -72,6 +73,7 @@ Times are the one-second MS average. This sweep was measured with the original 1
 
 
 ![chart](media/Grid-Dim-Chart.png)
+
 Cluster count at 2000 lights. Times are the one-second MS average. 
 
 | X | Y | Z | Total clusters | Clustered deferred (ms) | Forward+ (ms) |
