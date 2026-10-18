@@ -30,7 +30,15 @@ struct CameraUniforms {
     invProjMat: mat4x4f,
     screenSize: vec2f,
     nearPlane: f32,
-    farPlane: f32
+    farPlane: f32,
+    debugLightCount: u32
+}
+
+// Blue is an empty cluster. The ramp is logarithmic and saturates at 64 lights.
+fn clusterLightHeat(lightCount: u32) -> vec3f {
+    let t = clamp(log(f32(lightCount) + 1.0) / log(65.0), 0.0, 1.0);
+    let warm = mix(vec3f(0.05, 0.12, 0.45), vec3f(1.0, 0.85, 0.15), t);
+    return mix(warm, vec3f(0.85, 0.08, 0.05), smoothstep(0.55, 1.0, t));
 }
 
 // CHECKITOUT: this special attenuation function ensures lights don't affect geometry outside the maximum light radius

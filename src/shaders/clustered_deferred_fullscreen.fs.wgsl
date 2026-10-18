@@ -37,6 +37,9 @@ fn main(in: FragmentInput) -> @location(0) vec4f {
 
     let clusterIdx = clusterX + clusterY * ${numClustersX} + clusterZ * ${numClustersX} * ${numClustersY};
     let lightCount = clusterSet.clusters[clusterIdx].lightCount;
+    if (camera.debugLightCount != 0u) {
+        return vec4f(clusterLightHeat(lightCount), 1.0);
+    }
 
     var totalLightContrib = vec3f(0.0, 0.0, 0.0);
     for (var i = 0u; i < lightCount; i++) {

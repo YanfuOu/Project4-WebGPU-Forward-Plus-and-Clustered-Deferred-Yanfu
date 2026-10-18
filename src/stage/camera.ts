@@ -3,8 +3,10 @@ import { toRadians } from "../math_util";
 import { device, canvas, fovYDegrees, aspectRatio } from "../renderer";
 
 class CameraUniforms {
-    readonly buffer = new ArrayBuffer(208);
+    // 224 bytes: the previous 208, plus a u32 debug flag, rounded up to a 16-byte multiple.
+    readonly buffer = new ArrayBuffer(224);
     private readonly floatView = new Float32Array(this.buffer);
+    private readonly uintView = new Uint32Array(this.buffer);
 
     set viewProjMat(mat: Float32Array) {
         // TODO-1.1: set the first 16 elements of `this.floatView` to the input `mat`
@@ -25,6 +27,9 @@ class CameraUniforms {
     }
     set farPlane(far: number) {
         this.floatView[51] = far;
+    }
+    set debugLightCount(enabled: boolean) {
+        this.uintView[52] = enabled ? 1 : 0;
     }
 
     // TODO-2: add extra functions to set values needed for light clustering here
@@ -48,6 +53,7 @@ export class Camera {
     static readonly farPlane = 1000;
 
     keys: { [key: string]: boolean } = {};
+    debugLightCount = false;
 
     constructor () {
         // TODO-1.1: set `this.uniformsBuffer` to a new buffer of size `this.uniforms.buffer.byteLength`
@@ -158,6 +164,7 @@ export class Camera {
         this.uniforms.screenSize = [canvas.width, canvas.height];
         this.uniforms.nearPlane = Camera.nearPlane;
         this.uniforms.farPlane = Camera.farPlane;
+        this.uniforms.debugLightCount = this.debugLightCount;
 
         device.queue.writeBuffer(this.uniformsBuffer, 0, this.uniforms.buffer);
 
